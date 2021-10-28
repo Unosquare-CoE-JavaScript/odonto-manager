@@ -1,0 +1,8 @@
+body {
+  background-color: azure;
+  background-image: url(../assets/blurry3.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  padding-bottom: 30em;
+}
