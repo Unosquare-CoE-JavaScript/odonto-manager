@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../layout/Layout";
+import Layout from "../Layout/Layout";
 import {
   Grid,
   Paper,
@@ -54,7 +54,7 @@ const rows = [
   createData("Brazil", "BR", "Orthodontics", 8515767),
 ];
 
-const Patiens = () => {
+const Patients = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -84,7 +84,7 @@ const Patiens = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm container>
             <Typography gutterBottom variant="h4" component="div">
-              List of Patiens
+              List of Patients
             </Typography>
             <Paper sx={{ width: "100%", overflow: "hidden" }}>
               <TableContainer sx={{ maxHeight: 440 }}>
@@ -149,4 +149,4 @@ const Patiens = () => {
   );
 };
 
-export default Patiens;
+export default Patients;
