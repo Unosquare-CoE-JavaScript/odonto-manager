@@ -28,7 +28,7 @@ export default function Dashboard() {
                   Agenda
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  List of patiens
+                  List of patients
                 </Typography>
               </Grid>
             </Grid>

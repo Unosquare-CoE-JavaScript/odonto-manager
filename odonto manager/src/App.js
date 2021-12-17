@@ -1,11 +1,11 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Layout from "./components/layout";
-import Dashboard from "./components/layout/Dashboard";
-import LoginPage from "./components/Login";
+import Layout from "./components/Layout/Layout";
+import Dashboard from "./components/Layout/Dashboard";
+import LoginPage from "./components/Login/LoginPage";
 
-import Patiens from "./components/views/Patiens";
+import Patients from "./components/views/Patients";
 import Payments from "./components/views/Payments";
 import Profile from "./components/views/Profile";
 import Records from "./components/views/Records";
@@ -39,9 +39,9 @@ function App() {
           />
           <Route
             exact
-            path="/Patiens"
-            name="Patiens"
-            render={() => <Patiens />}
+            path="/Patients"
+            name="Patients"
+            render={() => <Patients />}
           />
           <Route
             exact

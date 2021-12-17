@@ -135,7 +135,7 @@ const Layout = () => {
                 }}
                 to="/Patiens"
               >
-                Patiens
+                Patients
               </Link>
             </Button>
           </li>
