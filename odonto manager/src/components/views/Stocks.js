@@ -16,22 +16,24 @@ const columns = [
 const Stocks = () => {
   const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    fetchData();
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        "https://us-central1-odontomanager-95368.cloudfunctions.net/app/api/stock"
+      );
+      const transformedData = response.data.map((item) => {
+        return { id: item.id, ...item.item_data };
+      });
+      setItems(transformedData);
+      console.log(transformedData);
+    } catch (err) {
+      console.log("Error: ", err);
+    }
   }, []);
 
-  function fetchData() {
-    axios
-      .get(
-        "https://us-central1-odontomanager-95368.cloudfunctions.net/app/api/stock"
-      )
-      .then((response) => {
-        const transformedData = response.data.map((item) => {
-          return { id: item.id, ...item.item_data };
-        });
-        setItems(transformedData);
-      });
-  }
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
     <>

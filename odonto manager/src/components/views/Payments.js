@@ -18,22 +18,24 @@ const columns = [
 const Payments = () => {
   const [payments, setPayment] = useState([]);
 
-  useEffect(() => {
-    fetchData();
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        "https://us-central1-odontomanager-95368.cloudfunctions.net/app/api/payments"
+      );
+      const transformedData = response.data.map((payment) => {
+        return { id: payment.id, ...payment.patient_data };
+      });
+      setPayment(transformedData);
+      console.log(transformedData);
+    } catch (err) {
+      console.log("Error: ", err);
+    }
   }, []);
 
-  function fetchData() {
-    axios
-      .get(
-        "https://us-central1-odontomanager-95368.cloudfunctions.net/app/api/payments"
-      )
-      .then((response) => {
-        const transformedData = response.data.map((payment) => {
-          return { id: payment.id, ...payment.patient_data };
-        });
-        setPayment(transformedData);
-      });
-  }
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
     <>

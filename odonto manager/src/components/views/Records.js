@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import axios from "axios";
 import Layout from "../Layout/Layout";
@@ -22,18 +22,24 @@ const Records = () => {
     fetchData()
   }, [])
 
-  function fetchData() {
-    axios
-      .get(
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await axios.get(
         "https://us-central1-odontomanager-95368.cloudfunctions.net/app/api/medical_records"
-      )
-      .then((response) => {
-        const transformedData = response.data.map((record) => {
-          return { id: record.id, ...record.patient_data };
-        });
-        setRecord(transformedData);
+      );
+      const transformedData = response.data.map((records) => {
+        return { id: records.id, ...records.patient_data };
       });
-  }
+      setRecord(transformedData);
+      console.log(transformedData);
+    } catch (err) {
+      console.log("Error: ", err);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
     <>
