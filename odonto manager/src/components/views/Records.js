@@ -18,10 +18,6 @@ const columns = [
 const Records = () => {
   const [record, setRecord] = useState([]);
 
-  useEffect(() => {
-    fetchData()
-  }, [])
-
   const fetchData = useCallback(async () => {
     try {
       const response = await axios.get(
@@ -43,8 +39,9 @@ const Records = () => {
 
   return (
     <>
-      <Layout />
+      <Layout>
       <TableTemplate columns={columns} rows={record} />
+      </Layout>
     </>
   );
 };

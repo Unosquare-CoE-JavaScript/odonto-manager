@@ -2,12 +2,13 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "@mui/material";
 
+
 const LogoutButton = () => {
   const { logout } = useAuth0();
   return (
     <>
       <div>
-        <h3 style={{ display: "start" }}>
+        <h3 style={{ display: "inherit" }}>
           {/* User is {isAuthenticated ? "logged in" : "not logged in "}
           Bienvenido {JSON.stringify(user.name)} &nbsp; */}
           <Button

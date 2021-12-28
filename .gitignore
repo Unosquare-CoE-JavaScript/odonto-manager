@@ -3,3 +3,6 @@ node_modules
 odonto manager/.DS_Store
 odonto manager/src/.DS_Store
 odonto manager/src/components/.DS_Store
+odonto manager/package-lock.json
+.DS_Store
+odonto manager/package-lock.json

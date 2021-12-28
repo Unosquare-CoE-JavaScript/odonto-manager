@@ -3,7 +3,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Layout from "../Layout/Layout";
 import TableTemplate from "../Layout/Table";
-import ModalWindow from "../UI/ModalContainer";
 import NewPatientForm from "../Forms/NewPatientForm";
 
 const columns = [
@@ -22,20 +21,15 @@ const columns = [
 const Patients = () => {
   const [patients, setPatients] = useState([]);
 
-  const openModal = (modalState) => {
-    const actionState = modalState;
-  };
-
   const fetchData = useCallback(async () => {
     try {
       const response = await axios.get(
         "https://us-central1-odontomanager-95368.cloudfunctions.net/app/api/patients"
       );
       const transformedData = response.data.map((patient) => {
-        return { id: patient.id, ...patient.patient_data };
+        return { id: patient.id, ...patient.patient_data.patient };
       });
       setPatients(transformedData);
-      console.log(transformedData);
     } catch (err) {
       console.log("Error: ", err);
     }
@@ -47,9 +41,13 @@ const Patients = () => {
 
   return (
     <>
-      <Layout />
-      <div style={{ height: 100 }}></div>
-      <TableTemplate columns={columns} rows={patients} formLoad={<NewPatientForm/>} />
+      <Layout>
+      <TableTemplate
+        columns={columns}
+        rows={patients}
+        formLoad={<NewPatientForm />}
+      />
+      </Layout>
     </>
   );
 };
