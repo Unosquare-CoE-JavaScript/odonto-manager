@@ -11,7 +11,7 @@ import {
   Button,
 } from "@mui/material";
 import { Menu as MenuIcon } from "@material-ui/icons";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import LogoutButton from "../UI/LogoutButton";
 import logo from "../assets/logo.png";
@@ -133,7 +133,7 @@ const Layout = () => {
                   textDecoration: "none",
                   color: "white",
                 }}
-                to="/Patiens"
+                to="/Patients"
               >
                 Patients
               </Link>

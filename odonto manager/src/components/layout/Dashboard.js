@@ -35,7 +35,6 @@ export default function Dashboard() {
           </Grid>
         </Grid>
       </Paper>
-      <MenuButton />
     </>
   );
 }

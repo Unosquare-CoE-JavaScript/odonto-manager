@@ -1,19 +1,37 @@
-import { Fab, Grid } from "@material-ui/core";
-import React from "react";
+import * as React from "react";
 
+import { Fab, Grid } from "@material-ui/core";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-const MenuButton = () => {
+import ModalContainer from "../UI/ModalContainer";
+
+const MenuButton = (props) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <>
       <div>
-        <Grid style={{ position: "absolute", bottom: 16, right: 16 }}>
-          <Fab color="primary" aria-label="Add">
+        <ModalContainer
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+        >
+          {props.formLoad}
+        </ModalContainer>
+        <Grid style={{ position: "relative", float: "right", bottom: "2%" }}>
+          <Fab color="primary" aria-label="Add" onClick={handleOpen}>
             <AddIcon />
           </Fab>
-          <Fab color="secondary" aria-label="Edit">
+
+          <Fab color="secondary" aria-label="Edit" onClick={handleOpen}>
             <EditIcon />
+          </Fab>
+          <Fab color="secondary" aria-label="Delete">
+            <DeleteIcon />
           </Fab>
         </Grid>
       </div>
