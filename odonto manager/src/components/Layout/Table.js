@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import {
   Paper,
@@ -13,11 +13,18 @@ import {
 import MenuButton from "../UI/MenuButton"
 
 const TableTemplate = (props) => {
+
+  const [selectedID, setSelectedID] = useState(null);
+
+  const selectedIDHandler = (idSelected) => {
+    props.onSaveId(idSelected)
+    setSelectedID(idSelected)
+  }
+
   return (
     <>
-      <div style={{ height: 100}}></div>
+     
       <div style={{width: "90%", margin: "auto"}}>
-      <MenuButton formLoad={props.formLoad}/>
       <TableContainer component={Paper}>
         <Table  sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
@@ -35,11 +42,11 @@ const TableTemplate = (props) => {
           <TableBody>
             {props.rows.map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id} selected={selectedID === row.id}>
                     {props.columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align="right">
+                        <TableCell key={column.id} align="right" onClick={() => selectedIDHandler(row.id)}>
                           {column.format && typeof value === "number"
                             ? column.format(value)
                             : value}

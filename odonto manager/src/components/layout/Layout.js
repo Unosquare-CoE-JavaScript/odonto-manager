@@ -9,7 +9,7 @@ import {
   Drawer,
   Divider,
   Box,
-  Grid
+  Grid,
 } from "@mui/material";
 
 import { styled, useTheme } from "@mui/material/styles";
@@ -22,15 +22,12 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import HomeIcon from "@mui/icons-material/Home";
-import EventIcon from "@mui/icons-material/Event"
-import PeopleIcon from "@mui/icons-material/People"
-import ListAltIcon from "@mui/icons-material/ListAlt"
-import PaymentsIcon from "@mui/icons-material/Payments"
-import FactCheckIcon from "@mui/icons-material/FactCheck"
-
+import EventIcon from "@mui/icons-material/Event";
+import PeopleIcon from "@mui/icons-material/People";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import PaymentsIcon from "@mui/icons-material/Payments";
+import FactCheckIcon from "@mui/icons-material/FactCheck";
 
 import logo from "../assets/logo.png";
 import LogoutButton from "../UI/LogoutButton";
@@ -85,7 +82,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 const Layout = (props) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -95,21 +91,13 @@ const Layout = (props) => {
     setOpen(false);
   };
 
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
         style={{ backgroundColor: "#FAFAFA" }}
         position="fixed"
-        open={mobileOpen}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
+        open={open}
       >
         <Toolbar>
           <IconButton
@@ -117,7 +105,6 @@ const Layout = (props) => {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
           >
             <MenuIcon />
           </IconButton>
@@ -147,20 +134,19 @@ const Layout = (props) => {
         variant="persistent"
         anchor="left"
         open={open}
-        
       >
         <DrawerHeader>
-          <IconButton component={Link} to="/Dashboard" >
-          <img
-            src={logo}
-            alt="logo"
-            style={{
-              marginLeft: "20px",
-              height: 50,
-              borderRadius: 8,
-              border: "3px solid white",
-            }}
-          ></img>
+          <IconButton component={Link} to="/Dashboard">
+            <img
+              src={logo}
+              alt="logo"
+              style={{
+                marginLeft: "20px",
+                height: 50,
+                borderRadius: 8,
+                border: "3px solid white",
+              }}
+            ></img>
           </IconButton>
           <IconButton onClick={handleDrawerClose} style={{ color: "#BB99FF" }}>
             {theme.direction === "ltr" ? (
@@ -172,85 +158,125 @@ const Layout = (props) => {
         </DrawerHeader>
         <Divider />
         <List>
-          
-          <ListItem button key="Home" component={Link} to="/Dashboard" sx={[{
-            '&:hover': {
-              color: '#BB99FF',
-              backgroundColor: '#EFE9FA'
-            }
-          }
-          ]}>
+          <ListItem
+            button
+            key="Home"
+            component={Link}
+            to="/Dashboard"
+            sx={[
+              {
+                "&:hover": {
+                  color: "#BB99FF",
+                  backgroundColor: "#EFE9FA",
+                },
+              },
+            ]}
+          >
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
 
-          <ListItem button key="Calendar" component={Link} to="/Calendar" sx={[{
-            '&:hover': {
-              color: '#BB99FF',
-              backgroundColor: '#EFE9FA'
-            }
-          }
-          ]}>
+          <ListItem
+            button
+            key="Calendar"
+            component={Link}
+            to="/Calendar"
+            sx={[
+              {
+                "&:hover": {
+                  color: "#BB99FF",
+                  backgroundColor: "#EFE9FA",
+                },
+              },
+            ]}
+          >
             <ListItemIcon>
               <EventIcon />
             </ListItemIcon>
             <ListItemText primary="Calendar" />
           </ListItem>
-          
-          <ListItem button key="Patients" component={Link} to="/Patients" sx={[{
-            '&:hover': {
-              color: '#BB99FF',
-              backgroundColor: '#EFE9FA'
-            }
-          }
-          ]}>
+
+          <ListItem
+            button
+            key="Patients"
+            component={Link}
+            to="/Patients"
+            sx={[
+              {
+                "&:hover": {
+                  color: "#BB99FF",
+                  backgroundColor: "#EFE9FA",
+                },
+              },
+            ]}
+          >
             <ListItemIcon>
               <PeopleIcon />
             </ListItemIcon>
             <ListItemText primary="Patients" />
           </ListItem>
 
-          <ListItem button key="MedicalRecords" component={Link} to="/Records" sx={[{
-            '&:hover': {
-              color: '#BB99FF',
-              backgroundColor: '#EFE9FA'
-            }
-          }
-          ]}>
+          <ListItem
+            button
+            key="MedicalRecords"
+            component={Link}
+            to="/Records"
+            sx={[
+              {
+                "&:hover": {
+                  color: "#BB99FF",
+                  backgroundColor: "#EFE9FA",
+                },
+              },
+            ]}
+          >
             <ListItemIcon>
               <ListAltIcon />
             </ListItemIcon>
             <ListItemText primary="Medical Records" />
           </ListItem>
-        
-          <ListItem button key="Payments" component={Link} to="/Payments" sx={[{
-            '&:hover': {
-              color: '#BB99FF',
-              backgroundColor: '#EFE9FA'
-            }
-          }
-          ]}>
+
+          <ListItem
+            button
+            key="Payments"
+            component={Link}
+            to="/Payments"
+            sx={[
+              {
+                "&:hover": {
+                  color: "#BB99FF",
+                  backgroundColor: "#EFE9FA",
+                },
+              },
+            ]}
+          >
             <ListItemIcon>
               <PaymentsIcon />
             </ListItemIcon>
             <ListItemText primary="Payments" />
           </ListItem>
 
-          <ListItem button key="Stock" component={Link} to="/Stocks" sx={[{
-            '&:hover': {
-              color: '#BB99FF',
-              backgroundColor: '#EFE9FA'
-            }
-          }
-          ]}>
+          <ListItem
+            button
+            key="Stock"
+            component={Link}
+            to="/Stocks"
+            sx={[
+              {
+                "&:hover": {
+                  color: "#BB99FF",
+                  backgroundColor: "#EFE9FA",
+                },
+              },
+            ]}
+          >
             <ListItemIcon>
               <FactCheckIcon />
             </ListItemIcon>
             <ListItemText primary="Stock" />
           </ListItem>
-
         </List>
         <Divider />
       </Drawer>

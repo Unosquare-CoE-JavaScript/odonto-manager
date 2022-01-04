@@ -17,6 +17,7 @@ const columns = [
 
 const Records = () => {
   const [record, setRecord] = useState([]);
+  const [selectedRecord, setSelectedRecord] = useState("")
 
   const fetchData = useCallback(async () => {
     try {
@@ -33,14 +34,24 @@ const Records = () => {
     }
   }, []);
 
+  const saveRecordID = useCallback((selectedRecord) => {
+    setSelectedRecord(selectedRecord)
+    console.log(selectedRecord)
+  }, [])
+
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+    saveRecordID();
+  }, [fetchData, saveRecordID]);
 
   return (
     <>
       <Layout>
-      <TableTemplate columns={columns} rows={record} />
+      <TableTemplate columns={columns} rows={record} onSaveId={saveRecordID}
+        section="medical_records"
+        selectedId={selectedRecord}
+        reload={fetchData}
+        />
       </Layout>
     </>
   );

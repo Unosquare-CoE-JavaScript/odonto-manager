@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -11,18 +11,18 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import Button from "@mui/material/Button";
 
-const NewPatientForm = () => {
-  const [name, setName] = useState("");
+const NewPatientForm = (props) => {
+  const [nameValue, setName] = useState();
   const [lastName, setLastName] = useState();
   const [gender, setGender] = useState("");
   const [date, setDate] = useState(new Date());
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [address, setAddress] = useState();
   const [minor, setMinor] = useState("");
-  const [guardiansName, setGuardiansName] = useState("");
-  const [guardiansAddress, setGuardiansAddress] = useState("");
-  const [guardiansPhone, setGuardiansPhone] = useState("");
-  const [ailments, setAilments] = useState("");
+  const [guardiansName, setGuardiansName] = useState();
+  const [guardiansAddress, setGuardiansAddress] = useState();
+  const [guardiansPhone, setGuardiansPhone] = useState();
+  const [ailments, setAilments] = useState();
 
   const handleName = (event) => {
     setName(event.target.value);
@@ -68,14 +68,12 @@ const NewPatientForm = () => {
     setAilments(event.target.value);
   };
 
- 
-
   const addPatientHandler = useCallback(async () => {
-    
     try {
       await axios.post(
-        "https://us-central1-odontomanager-95368.cloudfunctions.net/app/api/patients",{
-          name: name,
+        "https://us-central1-odontomanager-95368.cloudfunctions.net/app/api/patients",
+        {
+          names: nameValue,
           lastname: lastName,
           gender: gender,
           birthdate: date,
@@ -88,22 +86,22 @@ const NewPatientForm = () => {
           ailments: ailments
         }
       );
-      console.log("patient created")
+      console.log(`patient created ${nameValue} ${lastName}`)
     } catch (err) {
       console.log("Error: ", err);
     }
-  }, []);
+  }, [nameValue, lastName, gender, date, phoneNumber, address, minor, guardiansName, guardiansAddress, guardiansPhone, ailments]);
 
   const submitHandler = (event) => {
     event.preventDefault();
     addPatientHandler();
-    console.log(name, lastName, gender)
+    console.log(props.patientEditID)
   }
 
-  useEffect(() => {}, []);
+ 
+
 
   return (
-
     <Box
       component="form"
       sx={{
@@ -117,7 +115,7 @@ const NewPatientForm = () => {
         id="outlined-basic"
         label="Name"
         variant="outlined"
-        value={name}
+        value={nameValue}
         onChange={handleName}
       />
 

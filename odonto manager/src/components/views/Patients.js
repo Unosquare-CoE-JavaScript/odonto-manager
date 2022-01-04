@@ -4,6 +4,7 @@ import axios from "axios";
 import Layout from "../Layout/Layout";
 import TableTemplate from "../Layout/Table";
 import NewPatientForm from "../Forms/NewPatientForm";
+import MenuButton from "../UI/MenuButton";
 
 const columns = [
   { id: "names", label: "Name" },
@@ -20,6 +21,7 @@ const columns = [
 
 const Patients = () => {
   const [patients, setPatients] = useState([]);
+  const [selectedPatient, setSelectedPatient] = useState("")
 
   const fetchData = useCallback(async () => {
     try {
@@ -35,17 +37,25 @@ const Patients = () => {
     }
   }, []);
 
+
+  const savePatientID = useCallback((selectedPatient) => {
+    setSelectedPatient(selectedPatient)
+  }, [])
+
+
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+    savePatientID()
+  }, [fetchData, savePatientID]);
 
   return (
     <>
       <Layout>
+      <MenuButton formLoad={<NewPatientForm patientEditID={selectedPatient}/>} section="patients"selectedId={selectedPatient} reload={fetchData()}/>
       <TableTemplate
         columns={columns}
         rows={patients}
-        formLoad={<NewPatientForm />}
+        onSaveId={savePatientID}
       />
       </Layout>
     </>
