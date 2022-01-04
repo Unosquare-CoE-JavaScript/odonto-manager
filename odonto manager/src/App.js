@@ -1,10 +1,12 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import './App.css'
 
 import Layout from "./components/Layout/Layout";
 import Dashboard from "./components/Layout/Dashboard";
 import LoginPage from "./components/Login/LoginPage";
 
+import Calendar from "./components/views/Calendar"
 import Patients from "./components/views/Patients";
 import Payments from "./components/views/Payments";
 import Profile from "./components/views/Profile";
@@ -31,6 +33,12 @@ function App() {
             name="Layout"
             render={() => <Dashboard />}
           />
+          <Route
+            exact
+            path="/Calendar"
+            name="Calendar"
+            render={() => <Calendar />}
+          ></Route>
           <Route
             exact
             path="/Profile"

@@ -37,10 +37,9 @@ const Stocks = () => {
 
   return (
     <>
-      <Layout />
-      <div style={{ height: 100 }}></div>
+      <Layout>
       <TableTemplate columns={columns} rows={items} />
-
+      </Layout>
     </>
   );
 };

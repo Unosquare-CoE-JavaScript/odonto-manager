@@ -39,8 +39,10 @@ const Payments = () => {
 
   return (
     <>
-      <Layout />
+      <Layout>
       <TableTemplate columns={columns} rows={payments} />
+      </Layout>
+      
     </>
   );
 };
