@@ -1,41 +1,47 @@
 import * as React from "react";
-
-import { Grid, Paper, Typography } from "@mui/material";
-
 import Layout from "./Layout";
-import MenuButton from "../UI/MenuButton";
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function Dashboard() {
   return (
     <>
-      <Layout />
-      <div style={{ height: 100 }}></div>
-      <Paper
-        sx={{
-          p: 3,
-          margin: "auto",
-          maxWidth: 900,
-          height: 500,
-          flexGrow: 2,
-          borderRadius: 5,
-        }}
-      >
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Typography gutterBottom variant="h4" component="div">
-                  Agenda
-                </Typography>
-                <Typography variant="body2" gutterBottom>
-                  List of patiens
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
+      <Layout>
+      
+      <Box mr={2} ml = {2} sx={{ flexGrow: 1 }} >
+      <Grid container spacing={2} rowSpacing={2}>
+        <Grid item xs= {4}>
+          <Item>Dashboard 1</Item>
         </Grid>
-      </Paper>
-      <MenuButton />
+
+        <Grid item xs={4}>
+          <Item>xs=6</Item>
+        </Grid>
+
+        <Grid item xs={4}>
+          <Item>xs</Item>
+        </Grid>
+
+        <Grid item xs= {8}>
+          <Item>Dashboard 1</Item>
+        </Grid>
+
+        <Grid item xs={4}>
+          <Item>xs=6</Item>
+        </Grid>
+
+      </Grid>
+    </Box>
+    </Layout> 
     </>
   );
 }

@@ -1,9 +1,9 @@
 .header {
   width: 100% auto;
   height: 5rem o;
-  background-color: #39c1cb;
+  background-color: #001E3C;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-  display: flex;
+  display: block;
   justify-content: space-between;
   align-items: center;
   padding: 0 10%;

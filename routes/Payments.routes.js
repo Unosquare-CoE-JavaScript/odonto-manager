@@ -10,20 +10,15 @@ const db = admin.firestore();
 router.post("/api/payments", async (request, response) => {
   // for the errors
   try {
-    await db
-      .collection("payments")
-      .doc()
-      .create({
-        payment: ({
-          patientname,
-          paymentconcept,
-          totalamount,
-          paidamount,
-          numberinstalments,
-          date,
-          paymentmethod,
-        } = request.body),
-      });
+    await db.collection("payments").doc(/*"/" + request.body.id + "/*/).create({
+      patientname: request.body.patientname,
+      paymentconcept: request.body.paymentconcept,
+      totalamount: request.body.totalamount,
+      paidamount: request.body.paidamount,
+      numberinstalments: request.body.numberinstalments,
+      date: request.body.date,
+      paymentmethod: request.body.paymentmethod,
+    });
     return response.status(200).send(`message: Payment created successfully`);
   } catch {
     console.log(error);
@@ -81,15 +76,13 @@ router.put("/api/payments/:patient_id", async (request, response) => {
   try {
     const document = db.collection("payments").doc(request.params.patient_id);
     await document.update({
-      payment: ({
-        patientname,
-        paymentconcept,
-        totalamount,
-        paidamount,
-        numberinstalments,
-        date,
-        paymentmethod,
-      } = request.body),
+      patientname: request.body.patientname,
+      paymentconcept: request.body.paymentconcept,
+      totalamount: request.body.totalamount,
+      paidamount: request.body.paidamount,
+      numberinstalments: request.body.numberinstalments,
+      date: request.body.date,
+      paymentmethod: request.body.paymentmethod,
     });
     return response.status(200).send(`message: Payment updated successfully`);
   } catch (error) {

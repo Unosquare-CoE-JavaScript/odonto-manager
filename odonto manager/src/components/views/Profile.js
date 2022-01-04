@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Grid, Paper, Typography, Avatar, Stack } from "@mui/material";
-import Layout from "../layout/Layout";
+import Layout from "../Layout/Layout";
 
 const Profile = () => {
   const { user } = useAuth0();

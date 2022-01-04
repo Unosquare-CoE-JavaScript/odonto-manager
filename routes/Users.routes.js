@@ -9,20 +9,15 @@ const db = admin.firestore();
 router.post("/api/users", async (request, response) => {
   // for the errors
   try {
-    await db
-      .collection("users")
-      .doc()
-      .create({
-        user_data: ({
-          fullname,
-          birthdate,
-          address,
-          phonenumber,
-          checkinhour,
-          departuretime,
-          profilephoto,
-        } = request.body),
-      });
+    await db.collection("users").doc().create({
+      fullname: request.body.fullname,
+      birthdate: request.body.birthdate,
+      address: request.body.address,
+      phonenumber: request.body.phonenumber,
+      checkinhour: request.body.checkinhour,
+      departuretime: request.body.departuretime,
+      profilephoto: request.body.profilephoto,
+    });
     return response.status(200).send(`message: user created successfully`);
   } catch {
     console.log(error);
@@ -80,15 +75,13 @@ router.put("/api/users/:user_id", async (request, response) => {
   try {
     const document = db.collection("users").doc(request.params.user_id);
     await document.update({
-      user_data: ({
-        fullname,
-        birthdate,
-        address,
-        phonenumber,
-        checkinhour,
-        departuretime,
-        profilephoto,
-      } = request.body),
+      fullname: request.body.fullname,
+      birthdate: request.body.birthdate,
+      address: request.body.address,
+      phonenumber: request.body.phonenumber,
+      checkinhour: request.body.checkinhour,
+      departuretime: request.body.departuretime,
+      profilephoto: request.body.profilephoto,
     });
     return response.status(200).send(`message: item updated successfully`);
   } catch (error) {
