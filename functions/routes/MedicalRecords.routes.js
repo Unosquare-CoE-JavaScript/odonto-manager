@@ -10,14 +10,19 @@ const db = admin.firestore();
 router.post("/api/medical_records", async (request, response) => {
   // for the errors
   try {
-    await db.collection("medical_records").doc().create({
-      patientsid: request.body.patientsid,
-      initialdiagnosis: request.body.initialdiagnosis,
-      dateentry: request.body.dateentry,
-      procedureperformed: request.body.procedureperformed,
-      nextprocedure: request.body.nextprocedure,
-      newitemsused: request.body.newitemsused,
-    });
+    await db
+      .collection("medical_records")
+      .doc()
+      .create({
+        medical_r: ({
+          patient_id,
+          initialdiagnosis,
+          dateentry,
+          procedureperformed,
+          nextprocedure,
+          newitemsused,
+        } = request.body),
+      });
     return response
       .status(200)
       .send(`message: Medical record created successfully`);
@@ -85,11 +90,13 @@ router.put("/api/medical_records/:medical_id", async (request, response) => {
       .collection("medical_records")
       .doc(request.params.medical_id);
     await document.update({
-      initialdiagnosis: request.body.initialdiagnosis,
-      dateentry: request.body.dateentry,
-      procedureperformed: request.body.procedureperformed,
-      nextprocedure: request.body.nextprocedure,
-      newitemsused: request.body.newitemsused,
+      medical_r: ({
+        initialdiagnosis,
+        dateentry,
+        procedureperformed,
+        nextprocedure,
+        newitemsused,
+      } = request.body),
     });
     return response
       .status(200)

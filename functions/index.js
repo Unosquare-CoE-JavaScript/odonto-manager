@@ -4,6 +4,8 @@ const admin = require("firebase-admin");
 // to fix cors error
 const cors = require("cors");
 
+// const auth = require("./Auth/Auth");
+
 // use express
 const app = express();
 
@@ -15,10 +17,12 @@ admin.initializeApp({
   credential: admin.credential.applicationDefault(), //admin.credential.cert("./serviceAccountKey.json"),
   databaseURL: "https://odontomanager-95368-default-rtdb.firebaseio.com",
 });
-// use firestore database
-const db = admin.firestore();
+// // use firestore database
+// const db = admin.firestore();
 
-// *********CRUD********//
+// *********CRUD********// middlewares
+
+app.use(require("./Auth/Auth.js"));
 // import crud from patients
 app.use(require("./routes/Patients.routes"));
 // import crud from Stock
@@ -34,3 +38,4 @@ app.use(require("./routes/Users.routes"));
 
 // function app
 exports.app = functions.https.onRequest(app);
+

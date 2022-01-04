@@ -1,4 +1,5 @@
 const { Router } = require("express");
+
 const router = Router();
 
 const admin = require("firebase-admin");
@@ -11,23 +12,28 @@ const db = admin.firestore();
 router.post("/api/patients", async (request, response) => {
   // for the errors
   try {
-    await db.collection("patients").doc(/*"/" + request.body.id + "/*/).create({
-      names: request.body.names,
-      lastname: request.body.lastname,
-      birthdate: request.body.birthdate,
-      gender: request.body.gender,
-      phonenumber: request.body.phonenumber,
-      address: request.body.address,
-      minor: request.body.minor,
-      guardianfullname: request.body.guardianfullname,
-      guardianphonenumber: request.body.guardianphonenumber,
-      guardianaddress: request.body.guardianaddress,
-      ailments: request.body.ailments,
-    });
-    return response.status(200).send(`message: patient created successfully`);
+    await db
+      .collection("patients")
+      .doc()
+      .create({
+        patient: ({
+          names,
+          lastname,
+          birthdate,
+          gender,
+          phonenumber,
+          address,
+          minor,
+          guardianfullname,
+          guardianphonenumber,
+          guardianaddress,
+          ailments,
+        } = request.body),
+      });
+    return response.status(200).send(`message: patient created successfully`); // 401
   } catch {
     console.log(error);
-    return response.status(500).send(error);
+    return response.status(500).send();
   }
 });
 
@@ -81,18 +87,21 @@ router.put("/api/patients/:patient_id", async (request, response) => {
   try {
     const document = db.collection("patients").doc(request.params.patient_id);
     await document.update({
-      names: request.body.names,
-      lastname: request.body.lastname,
-      birthdate: request.body.birthdate,
-      gender: request.body.gender,
-      phonenumber: request.body.phonenumber,
-      address: request.body.address,
-      minor: request.body.minor,
-      guardianfullname: request.body.guardianfullname,
-      guardianphonenumber: request.body.guardianphonenumber,
-      guardianaddress: request.body.guardianaddress,
-      ailments: request.body.ailments,
+      patient: ({
+        names,
+        lastname,
+        birthdate,
+        gender,
+        phonenumber,
+        address,
+        minor,
+        guardianfullname,
+        guardianphonenumber,
+        guardianaddress,
+        ailments,
+      } = request.body),
     });
+
     return response.status(200).send(`message: Patient updated successfully`);
   } catch (error) {
     return response.status(500).json(error);

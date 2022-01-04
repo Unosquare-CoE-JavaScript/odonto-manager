@@ -9,12 +9,13 @@ const db = admin.firestore();
 router.post("/api/stock", async (request, response) => {
   // for the errors
   try {
-    await db.collection("stock").doc().create({
-      itemdescription: request.body.itemdescription,
-      quantity: request.body.quantity,
-      suppliersname: request.body.suppliersname,
-      expirationdate: request.body.expirationdate,
-    });
+    await db
+      .collection("stock")
+      .doc()
+      .create({
+        item: ({ itemdescription, quantity, suppliersname, expirationdate } =
+          request.body),
+      });
     return response.status(200).send(`message: item created successfully`);
   } catch {
     console.log(error);
@@ -72,10 +73,8 @@ router.put("/api/stock/:item_id", async (request, response) => {
   try {
     const document = db.collection("stock").doc(request.params.item_id);
     await document.update({
-      itemdescription: request.body.itemdescription,
-      quantity: request.body.quantity,
-      suppliersname: request.body.suppliersname,
-      expirationdate: request.body.expirationdate,
+      item: ({ itemdescription, quantity, suppliersname, expirationdate } =
+        request.body),
     });
     return response.status(200).send(`message: item updated successfully`);
   } catch (error) {

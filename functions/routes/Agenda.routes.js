@@ -10,14 +10,13 @@ const db = admin.firestore();
 router.post("/api/agenda", async (request, response) => {
   // for the errors
   try {
-    await db.collection("agenda").doc(/*auto generated id */).create({
-      patientsid: request.body.patientsid,
-      date: request.body.date, // timestamp
-      hour: request.body.hour, // timestamp
-      names: request.body.names,
-      lastname: request.body.lastname,
-      notes: request.body.notes, // string
-    });
+    await db
+      .collection("agenda")
+      .doc()
+      .create({
+        patient: ({ patient_id, date, hout, names, lastname, notes } =
+          request.body),
+      });
     return response
       .status(200)
       .send(`message: Agenda item created successfully`);
@@ -79,11 +78,7 @@ router.put("/api/agenda/:agenda_id", async (request, response) => {
   try {
     const document = db.collection("agenda").doc(request.params.agenda_id);
     await document.update({
-      date: request.body.date, // timestamp
-      hour: request.body.hour, // timestamp
-      names: request.body.names,
-      lastname: request.body.lastname,
-      notes: request.body.notes, // string
+      patient: ({ date, hour, lastname, notes } = request.body),
     });
     return response
       .status(200)
